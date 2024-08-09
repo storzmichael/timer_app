@@ -26,7 +26,7 @@ final ThemeData iosTheme = ThemeData(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
       ),
-      textStyle: TextStyle(
+      textStyle: const TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.normal,
       ),
@@ -35,7 +35,7 @@ final ThemeData iosTheme = ThemeData(
   textButtonTheme: TextButtonThemeData(
     style: TextButton.styleFrom(
       foregroundColor: Colors.blue,
-      textStyle: TextStyle(
+      textStyle: const TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.normal,
       ),
@@ -43,12 +43,12 @@ final ThemeData iosTheme = ThemeData(
   ),
 
   // Icon-Design
-  iconTheme: IconThemeData(
+  iconTheme: const IconThemeData(
     color: Colors.blue,
   ),
 
   // Text-Design
-  textTheme: TextTheme(
+  textTheme: const TextTheme(
     bodyMedium: TextStyle(
       color: Colors.white,
       fontSize: 17,
@@ -60,7 +60,7 @@ final ThemeData iosTheme = ThemeData(
   inputDecorationTheme: InputDecorationTheme(
     filled: true,
     fillColor: Colors.white,
-    contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+    contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(8.0),
       borderSide: BorderSide(color: Colors.grey.shade300),
@@ -71,9 +71,9 @@ final ThemeData iosTheme = ThemeData(
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(8.0),
-      borderSide: BorderSide(color: Colors.blue),
+      borderSide: const BorderSide(color: Colors.blue),
     ),
-    hintStyle: TextStyle(color: Colors.grey),
+    hintStyle: const TextStyle(color: Colors.grey),
   ),
 
   // Karten-Design
