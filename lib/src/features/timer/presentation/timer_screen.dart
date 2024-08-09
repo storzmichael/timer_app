@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:timer_app/src/core/presentation/app_home.dart';
+import 'package:flutter/services.dart';
 
 class TimerScreen extends StatefulWidget {
   const TimerScreen({super.key});
@@ -21,10 +21,8 @@ class _TimerScreenState extends State<TimerScreen> {
       });
     }
     if (timerMilliSeconds <= 0) {
+      setState(() {});
       stopTimer();
-      setState(() {
-        scaffoldColor = Colors.green;
-      });
     }
   }
 
@@ -48,7 +46,6 @@ class _TimerScreenState extends State<TimerScreen> {
     setState(() {
       timerMilliSeconds = 0;
       _controller.clear();
-      scaffoldColor = Colors.black;
     });
   }
 
@@ -62,9 +59,22 @@ class _TimerScreenState extends State<TimerScreen> {
           TextFormField(
             controller: _controller,
             keyboardType: TextInputType.number,
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+            ],
             decoration: const InputDecoration(
               labelText: 'Eingabe in Sekunden',
+              labelStyle: TextStyle(color: Colors.amber),
+              filled: true,
+              fillColor: Colors.black,
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.amber),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.amber, width: 2.0),
+              ),
             ),
+            style: const TextStyle(color: Colors.white),
             onChanged: (value) {
               setState(() {
                 timerMilliSeconds = (int.tryParse(value) ?? 0) * 1000;
@@ -94,14 +104,8 @@ class _TimerScreenState extends State<TimerScreen> {
                 width: 40,
               ),
               isRunning
-                  ? ElevatedButton(
-                      onPressed: stopTimer,
-                      child: const Text('Pause'),
-                    )
-                  : ElevatedButton(
-                      onPressed: startTimer,
-                      child: const Text('Start'),
-                    ),
+                  ? ElevatedButton(onPressed: stopTimer, child: const Text('Pause'))
+                  : ElevatedButton(onPressed: startTimer, child: const Text('Start')),
             ],
           ),
         ],
