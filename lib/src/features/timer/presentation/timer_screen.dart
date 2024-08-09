@@ -48,11 +48,14 @@ class _TimerScreenState extends State<TimerScreen> {
             height: 64,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(
                 onPressed: () {},
-                child: const Text('Abbrechen'),
+                child: const Text('Reset'),
+              ),
+              SizedBox(
+                width: 40,
               ),
               isTimerRun
                   ? ElevatedButton(

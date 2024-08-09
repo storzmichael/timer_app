@@ -165,13 +165,13 @@ class _StopwatchScreenState extends State<StopwatchScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               ElevatedButton(
-                onPressed: startStopwatch,
-                child: Text(isTimerRunning ? 'Pause' : 'Start'),
-              ),
-              const SizedBox(width: 20),
-              ElevatedButton(
                 onPressed: resetStopwatch,
                 child: const Text('Reset'),
+              ),
+              const SizedBox(width: 40),
+              ElevatedButton(
+                onPressed: startStopwatch,
+                child: Text(isTimerRunning ? 'Pause' : 'Start'),
               ),
             ],
           ),
