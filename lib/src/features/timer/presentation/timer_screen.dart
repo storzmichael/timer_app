@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:timer_app/src/features/timer/presentation/scroll_wheel.dart';
-import 'package:timer_app/src/features/timer/presentation/wheel_timer.dart';
+import 'package:timer_app/src/core/presentation/app_home.dart';
 
 class TimerScreen extends StatefulWidget {
   const TimerScreen({super.key});
@@ -10,19 +9,46 @@ class TimerScreen extends StatefulWidget {
 }
 
 class _TimerScreenState extends State<TimerScreen> {
-  bool isTimerRun = false;
+  int timerMilliSeconds = 0;
+  bool isRunning = false;
+  final TextEditingController _controller = TextEditingController();
 
-  Future<void> fetchTimer() async {
-    Future.delayed(const Duration(seconds: 3));
+  Future<void> runTime() async {
+    while (isRunning && timerMilliSeconds > 0) {
+      await Future.delayed(const Duration(milliseconds: 100));
+      setState(() {
+        timerMilliSeconds -= 100;
+      });
+    }
+    if (timerMilliSeconds <= 0) {
+      stopTimer();
+      setState(() {
+        scaffoldColor = Colors.green;
+      });
+    }
   }
 
-  void setTimer() async {
+  void startTimer() {
+    if (!isRunning && timerMilliSeconds > 0) {
+      setState(() {
+        isRunning = true;
+      });
+      runTime();
+    }
+  }
+
+  void stopTimer() {
     setState(() {
-      isTimerRun = true;
+      isRunning = false;
     });
-    await fetchTimer();
+  }
+
+  void clearTimer() {
+    stopTimer();
     setState(() {
-      isTimerRun = false;
+      timerMilliSeconds = 0;
+      _controller.clear();
+      scaffoldColor = Colors.black;
     });
   }
 
@@ -31,18 +57,28 @@ class _TimerScreenState extends State<TimerScreen> {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          TextFormField(
+            controller: _controller,
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(
+              labelText: 'Eingabe in Sekunden',
+            ),
+            onChanged: (value) {
+              setState(() {
+                timerMilliSeconds = (int.tryParse(value) ?? 0) * 1000;
+              });
+            },
+          ),
           const SizedBox(
-            height: 80,
+            height: 32,
           ),
-          const Text(
-            'Timer',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: 200,
-            child: isTimerRun ? const SimpleTimer() : const ScrollWheel(),
+          Center(
+            child: Text(
+              '${(timerMilliSeconds / 1000)} s',
+              style: const TextStyle(fontSize: 72, fontWeight: FontWeight.bold),
+            ),
           ),
           const SizedBox(
             height: 64,
@@ -51,23 +87,23 @@ class _TimerScreenState extends State<TimerScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(
-                onPressed: () {},
+                onPressed: clearTimer,
                 child: const Text('Reset'),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 40,
               ),
-              isTimerRun
+              isRunning
                   ? ElevatedButton(
-                      onPressed: setTimer,
+                      onPressed: stopTimer,
                       child: const Text('Pause'),
                     )
                   : ElevatedButton(
-                      onPressed: setTimer,
+                      onPressed: startTimer,
                       child: const Text('Start'),
                     ),
             ],
-          )
+          ),
         ],
       ),
     );
