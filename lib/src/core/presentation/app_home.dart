@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-
+import 'package:timer_app/src/features/example/presentation/example_stopwatch.dart';
 import 'package:timer_app/src/features/stopwatch/presentation/stopwatch_screen.dart';
 import 'package:timer_app/src/features/timer/presentation/timer_screen.dart';
 
+Color scaffoldColor = Colors.black;
+
 class AppHome extends StatefulWidget {
-  static const routeName = '/';
   const AppHome({super.key});
 
   @override
@@ -14,20 +15,19 @@ class AppHome extends StatefulWidget {
 class _AppHomeState extends State<AppHome> {
   int currentIndex = 0;
 
-  @override
-  void initState() {
-    super.initState();
-  } //List of screen from navigation bar
-
   final List<Widget> screens = [
     const StopwatchScreen(),
     const TimerScreen(),
+    const ExampleScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+      ),
+      backgroundColor: scaffoldColor,
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black,
         currentIndex: currentIndex,
@@ -37,29 +37,21 @@ class _AppHomeState extends State<AppHome> {
           });
         },
         showSelectedLabels: true,
-        showUnselectedLabels: false,
+        showUnselectedLabels: true,
+        selectedItemColor: Colors.amber,
+        unselectedItemColor: Colors.white,
         items: const [
           BottomNavigationBarItem(
-            activeIcon: Icon(
-              Icons.watch,
-              color: Colors.white,
-            ),
-            icon: Icon(
-              Icons.watch,
-              color: Colors.white,
-            ),
+            icon: Icon(Icons.watch),
             label: 'Stopwatch',
           ),
           BottomNavigationBarItem(
-            activeIcon: Icon(
-              Icons.watch_later_outlined,
-              color: Colors.white,
-            ),
-            icon: Icon(
-              Icons.watch_later_outlined,
-              color: Colors.white,
-            ),
+            icon: Icon(Icons.watch_later_outlined),
             label: 'Timer',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.watch_later_outlined),
+            label: 'Stopwatch 2',
           ),
         ],
       ),
