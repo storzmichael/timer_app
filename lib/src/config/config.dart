@@ -21,8 +21,8 @@ final ThemeData iosTheme = ThemeData(
   // Schaltflächen-Design
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      foregroundColor: Colors.white,
-      backgroundColor: Colors.blue,
+      foregroundColor: Colors.black,
+      backgroundColor: Colors.amber,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
       ),
