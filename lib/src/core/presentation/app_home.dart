@@ -3,6 +3,8 @@ import 'package:timer_app/src/features/example/presentation/example_stopwatch.da
 import 'package:timer_app/src/features/stopwatch/presentation/stopwatch_screen.dart';
 import 'package:timer_app/src/features/timer/presentation/timer_screen.dart';
 
+Color scaffoldColor = Colors.black;
+
 class AppHome extends StatefulWidget {
   const AppHome({super.key});
 
@@ -22,7 +24,10 @@ class _AppHomeState extends State<AppHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+      ),
+      backgroundColor: scaffoldColor,
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black,
         currentIndex: currentIndex,
@@ -33,8 +38,8 @@ class _AppHomeState extends State<AppHome> {
         },
         showSelectedLabels: true,
         showUnselectedLabels: true,
-        selectedItemColor: Colors.amber, // Ändert die Schriftfarbe des ausgewählten Labels
-        unselectedItemColor: Colors.white, // Ändert die Schriftfarbe der nicht ausgewählten Labels
+        selectedItemColor: Colors.amber,
+        unselectedItemColor: Colors.white,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.watch),
