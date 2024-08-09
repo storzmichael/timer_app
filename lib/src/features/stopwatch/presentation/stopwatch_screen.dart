@@ -101,10 +101,6 @@ class _StopwatchScreenState extends State<StopwatchScreen> {
           const SizedBox(
             height: 80,
           ),
-          const Text(
-            'Stopuhr',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
           const SizedBox(height: 64),
           Center(
             child: Row(
