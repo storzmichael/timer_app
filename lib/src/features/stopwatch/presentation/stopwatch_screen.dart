@@ -167,7 +167,7 @@ class _StopwatchScreenState extends State<StopwatchScreen> {
               const SizedBox(width: 40),
               ElevatedButton(
                 onPressed: startStopwatch,
-                child: Text(isTimerRunning ? 'Pause' : 'Start'),
+                child: Text(isTimerRunning ? 'Stop' : 'Start'),
               ),
             ],
           ),
